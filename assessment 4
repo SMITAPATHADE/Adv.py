@@ -1,0 +1,197 @@
+s = input("Enter a string: ")
+result = s.replace('a', '*')
+print("Modified string:", result)
+
+Q.2 Write a Python program using regular expressions to validate whether a given string matches the pattern of three-letter words such as cat, cot, cut, mat, met, mud.
+Ans-
+import re
+word = input("Enter a word: ")
+pattern = "^[cm][aeou][td]$"
+if re.match(pattern, word):
+    print("Valid word")
+else:
+    print("Invalid word")
+
+Q.3 Build a package education with a sub package courses, containing modules science.py and arts.py. Each module should have a function get_subjects(). Write a python program to display all subjects.
+Ans-
+import os
+
+# Create folder structure
+os.makedirs("education/courses", exist_ok=True)
+
+# Create _init_.py files
+open("education/_init_.py", "w").close()
+open("education/courses/_init_.py", "w").close()
+
+# Create science.py
+with open("education/courses/science.py", "w") as f:
+    f.write("""
+def get_subjects():
+    return ["Physics", "Chemistry", "Biology", "Mathematics"]
+""")
+
+# Create arts.py
+with open("education/courses/arts.py", "w") as f:
+    f.write("""
+def get_subjects():
+    return ["History", "Geography", "Political Science", "Sociology"]
+""")
+
+# Import modules
+from education.courses import science, arts
+
+# Display subjects
+print("Science Subjects:")
+for sub in science.get_subjects():
+    print(sub)
+
+print("\\nArts Subjects:")
+for sub in arts.get_subjects():
+    print(sub)
+
+Q.4 Write a python program to display all entries in a current directory and identify each as file or folder. [Use getcwd() function to retrieve current directory]
+Ans:-
+import os
+
+# Get current working directory
+current_dir = os.getcwd()
+print("Current Directory:", current_dir)
+
+# List all entries
+entries = os.listdir(current_dir)
+
+print("\nEntries in the directory:")
+for entry in entries:
+    # Check if it is file or folder
+    if os.path.isfile(entry):
+        print(entry, "- File")
+    elif os.path.isdir(entry):
+        print(entry, "- Folder")
+    else:
+        print(entry, "- Other")
+
+Q.5 Write a python program to check the validity of a password given by the user. The password should 
+satisfy the following criteria: 
+a) Contain at least 1 letter between a and z 
+b) Contain at least 1 number between 0 and 9 
+c) Contain at least 1 character from $, #, @ 
+d) Minimum length of password: 6 
+e) Maximum length of password: 12
+Ans:-
+[8:53 am, 25/03/2026] Prof .Aarti Aware Jagtap: import os
+
+# Get current working directory
+current_dir = os.getcwd()
+print("Current Directory:", current_dir)
+
+# List all entries
+entries = os.listdir(current_dir)
+
+print("\nEntries in the directory:")
+for entry in entries:
+    # Check if it is file or folder
+    if os.path.isfile(entry):
+        print(entry, "- File")
+    elif os.path.isdir(entry):
+        print(entry, "- Folder")
+    else:
+        print(entry, "- Other")
+[8:54 am, 25/03/2026] Prof .Aarti Aware Jagtap: import re
+
+# Input password
+password = input("Enter password: ")
+
+# Regex pattern
+pattern = r'^(?=.[a-z])(?=.[0-9])(?=.*[$#@]).{6,12}$'
+
+# Check validity
+if re.match(pattern, password):
+    print("Valid Password")
+else:
+    print("Invalid Password")
+
+Q.6 Write a python program to remove all whitespaces from a given string. Display modified string
+Ans:-
+# Input string
+s = input("Enter a string: ")
+
+# Remove all whitespaces
+result = s.replace(" ", "")
+print("Modified string:", result
+
+Q.7 Write a Python program to shuffle a deck of card. Display the cards obtained by a user in 5 attempts.
+Ans:-
+import random
+
+# Create deck of cards
+suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+
+deck = []
+
+# Combine suits and ranks
+for suit in suits:
+    for rank in ranks:
+        deck.append(rank + " of " + suit)
+
+# Shuffle the deck
+random.shuffle(deck)
+
+# Display 5 cards (5 attempts)
+print("Cards drawn:")
+for i in range(5):
+    print(deck[i])
+
+Q.8 Create a Web Page using Flask which contains following information about your college. 
+a) College Name as a heading in center of web page. 
+b) Display all the courses available in your college. 
+c) Image of your College.
+Ans:-
+from flask import Flask, render_template
+import os
+
+# Create templates folder
+os.makedirs("templates", exist_ok=True)
+
+# Create HTML file
+with open("templates/index.html", "w") as f:
+    f.write("""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Info</title>
+</head>
+<body>
+
+<h1 style="text-align:center;">{{ college }}</h1>
+
+<h2>Courses Offered:</h2>
+<ul>
+{% for course in courses %}
+    <li>{{ course }}</li>
+{% endfor %}
+</ul>
+
+<h2>Our College:</h2>
+<img src="{{ image }}" width="400">
+
+</body>
+</html>
+""")
+
+# Flask app
+app = Flask(_name_)
+
+@app.route('/')
+def home():
+    college_name = "ABC College"
+    courses = ["BSc Computer Science", "BCA", "BCom", "BA", "MSc IT"]
+    image_url = "https://via.placeholder.com/400"
+
+    return render_template("index.html", 
+                           college=college_name, 
+                           courses=courses, 
+                           image=image_url)
+
+# Run app
+app.run()
